@@ -18,7 +18,7 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
     crossorigin="anonymous"
   />
-  <title>Shop-G - Carrito</title>
+  <title>Shop-G - Lista de Productos</title>
   </head>
   <body>
     <!-- inicio Header -->
@@ -217,7 +217,7 @@
               alt="icono Carrito"
           /></a>
         </div>
-        <h3>Carrito de Compras</h3>
+        <h3>Lista de Productos</h3>
         <div class="cont_IconoCarr_02">
           <a href=""
             ><img
@@ -235,23 +235,56 @@
          <section class="mb-12 p-1  carrito__cont_art col-12" id="section_ProdCarrito">
 
             <!-- Se completa con el codigo de JavaScritp -->
-               
+            
                   
               </section>
 
 <!-- FIN - SECCION DONDE MOSTRAMOS LOS PRODUCTOS -->
 
- 
-<!-- INICIO - SECCION DETALLES A PAGAR CON BOTON DE COMPRA-->
-              <div class="col-md-12 p-2 carrito__cont_total col-12 d-flex">
-                
-                <div class="col-6 col-md-4"><h4> TOTAL A PAGAR: </h4></div>
-                <div class="col-6 col-md-4"><h3> $ 12000 </h3></div>
-
+     <!-- Button trigger modal -->
+     <button id="toggleMyModal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+      Ver carrito de compras <i class="bi bi-bag-check-fill"></i>
+  </button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="container">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Cantidad</th>
+                          <th scope="col">Precio</th>
+                          <th scope="col">Total</th>
+                          </tr>
+                      </thead>
+                      <tbody id="items"></tbody>
+                      <tfoot>
+                          <tr id="footer">
+                          <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+                          </tr>
+                      </tfoot>
+                      </table>
+                  <div class="row" id="cards"></div>
               </div>
+          
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Terminar compra</button>
+          </div>
+      </div>
+  </div>
+</div>
+ 
 
-              <button type="button" class="btn btn-primary btn-lg carrito__boton_comprar col-8 col-md-4">COMPRAR AHORA</button>
-<!-- FIN - SECCION DETALLES A PAGAR CON BOTON DE COMPRA -->
   
       
     <!-- FIN SECCION CARRITO -->
