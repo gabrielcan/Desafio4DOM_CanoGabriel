@@ -55,30 +55,70 @@ productos.forEach(producto=>{
   carrito_descripProd=document.createElement("p");
   carrito_descripProd.className="card-text"
   carrito_descripProd.innerHTML=producto.descrip;
-  
-  carrito_ContBtnAgregar=document.createElement("div");
-  carrito_ContBtnAgregar.className="col-md-4 col-12 d-flex justify-content-center align-self-center";
 
+  carrito_ContBtnAgregar=document.createElement("div");
+  carrito_ContBtnAgregar.className="col-md-2 col-12 d-flex justify-content-center align-self-center";
   carrito_btnAgregar=document.createElement("button");
   carrito_btnAgregar.className="btn btn-primary";
   carrito_btnAgregar.value="Agregar";
   carrito_btnAgregar.innerHTML="AGREGAR";
+  /* genero la accion del evento que va realizar el boton agregar de cada producto */
   carrito_btnAgregar.onclick=()=>{
 
-    let elementoCarrito=new ElementoCarrito(producto,1)
-    elementosCarrito.push(elementoCarrito)
+    let elementoCarrito;
+    
+    elementoCarrito=new ElementoCarrito(producto,1);
 
-/*     console.log(elementosCarrito) */
-    dibujarCarrito(); //agrego el producto al array cuando presiono el boton "agregar"
+    let modifProd=elementosCarrito.find(item=>item.producto.id===elementoCarrito.producto.id);//verifico si el producto que estoy agregadon ya existe en el array del carrito
+    
+    if(modifProd){ //al existir el producto en el array del carrito sumamos en 1 la cantidad
 
+    elementosCarrito.map(item=>{
+
+     if(item.producto.id===modifProd.producto.id){item.cantidad=item.cantidad+1; alert(`Fue sumado una unidad mas del producto "${item.producto.nombre}" al CARRITO`)}
+
+     dibujarCarrito(); 
+
+      });
+
+      
+
+  productos.map(item=>{
+    
+  item.id===modifProd.producto.id?item.stock=item.stock-1:item 
+  
+ 
+      })
+
+      console.log(productos)
+
+   } else {
+      elementoCarrito=new ElementoCarrito(producto,1);
+      elementosCarrito.push(elementoCarrito)
+
+      productos.map(item=>{
+    
+        if(item.stock>0){
+        item.id===elementoCarrito.producto.id?item.stock=item.stock-1:item 
+      }else{
+
+      }
+       
+            })
+       alert(`Producto Agregado al CARRITO`)
+
+      dibujarCarrito();
+    }
+  
   }
 
+carrito_precio=document.createElement("div");
+carrito_precio.className="col-md-2 d-flex carrito__cont_cant_art";
 
-
-
+carrito_precio.innerHTML=`<h2>$${producto.valorUnidad}</h2>`;
 
   section_ProdCarrito.appendChild(contProdCarrito);
-  contProdCarrito.append(carrito_Cont_img,prodSeccion1Carrito,carrito_ContBtnAgregar);
+  contProdCarrito.append(carrito_Cont_img,prodSeccion1Carrito,carrito_precio,carrito_ContBtnAgregar);
   carrito_ContBtnAgregar.append(carrito_btnAgregar);
   carrito_Cont_img.appendChild(contImgCarrito);
   
@@ -105,13 +145,13 @@ productos.forEach(producto=>{
 
     elementosCarrito.forEach(
         (elemento) => {
-          console.log(elemento)
+          /* console.log(elemento) */
             let renglonesCarrito= document.createElement("tr");
             
             renglonesCarrito.innerHTML = `
                 <td>${elemento.producto.id}</td>
                 <td>${elemento.producto.nombre}</td>
-                <td><input id="cantidad-producto-${elemento.producto.id}" type="number" value="${elemento.cantidad}" min="1" max="1000" step="1" style="width: 50px;"/></td>
+                <td><input id="cantidad-producto-${elemento.producto.id}" type="number" value="${elemento.cantidad}" min="1" max="1000" step="1" style="width:3rem;"/></td>
                 <td>$ ${elemento.producto.valorUnidad}</td>
                 <td>$ ${estandarDolaresAmericanos.format(elemento.producto.valorUnidad*elemento.cantidad)}</td>
          
@@ -168,7 +208,8 @@ let carrito_TituloProducto;
 let carrito_descripProd;
 let carrito_ContBtnAgregar; 
 let carrito_btnAgregar;
-let acumulador=1;
+let carrito_precio;
+
 
 
 
